@@ -3,7 +3,8 @@
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [
-    ".eide/deps"
+    ".eide/deps",
+    "USER"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -77,15 +78,6 @@
           }
         ],
         "folders": []
-      },
-      {
-        "name": "USER",
-        "files": [
-          {
-            "path": "main.c"
-          }
-        ],
-        "folders": []
       }
     ]
   },
@@ -97,7 +89,10 @@
   },
   "targets": {
     "freertos": {
-      "excludeList": [],
+      "excludeList": [
+        "<virtual_root>/USER/main.c",
+        "<virtual_root>/USER"
+      ],
       "toolchain": "GCC",
       "compileConfig": {
         "cpuType": "Cortex-M3",
@@ -133,17 +128,16 @@
       "custom_dep": {
         "name": "default",
         "incList": [
-          "Libraries/AIR32F10xLib/inc",
-          "Libraries/CMSIS/Include",
           "FreeRTOS-Kernel/include",
           ".",
           "FreeRTOS-Kernel/portable/GCC/ARM_CM3",
           ".cmsis/include",
           "RTE/_freertos",
-          ".eide/deps"
+          ".eide/deps",
+          "Libraries/AIR32F10xLib/inc"
         ],
         "libList": [
-          "Libraries/AIR32F10xLib/lib/cryptlib"
+          "."
         ],
         "sourceDirList": [],
         "defineList": [

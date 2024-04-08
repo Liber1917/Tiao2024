@@ -144,7 +144,7 @@
       "compileConfig": {
         "cpuType": "Cortex-M3",
         "floatingPointHardware": "none",
-        "scatterFilePath": "",
+        "scatterFilePath": "../startup_stm32f10x_hd.s",
         "useCustomScatterFile": true,
         "storageLayout": {
           "RAM": [],
