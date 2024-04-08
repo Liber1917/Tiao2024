@@ -24,8 +24,11 @@ int main(void)
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 	RCC_GetClocksFreq(&clocks); //获取时钟频率
 
-
+	// 超声检测初始化
 	ultrasound_init();
+	//
+
+	
 	// printf("SYSCLK: %3.1fMhz, \nHCLK: %3.1fMhz, \nPCLK1: %3.1fMhz, \nPCLK2: %3.1fMhz, \nADCCLK: %3.1fMhz\n",
 	// 		   (float)clocks.SYSCLK_Frequency / 1000000, (float)clocks.HCLK_Frequency / 1000000,
 	// 		   (float)clocks.PCLK1_Frequency / 1000000, (float)clocks.PCLK2_Frequency / 1000000, (float)clocks.ADCCLK_Frequency / 1000000);
