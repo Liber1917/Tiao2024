@@ -24,7 +24,9 @@
             "editor.insertSpaces": true,
             "editor.tabSize": 4,
             "editor.autoIndent": "advanced"
-        }
+        },
+        "cortex-debug.variableUseNaturalFormat": false,
+        "digital-ide.welcome.show": false
     },
     "extensions": {
         "recommendations": [

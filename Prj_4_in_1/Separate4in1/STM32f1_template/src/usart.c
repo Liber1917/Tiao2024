@@ -42,35 +42,13 @@ void UART_Configuration(uint32_t bound)
 
     // 配置 NVIC 中断优先级
     NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = configLIBRARY_KERNEL_INTERRUPT_PRIORITY;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 
     // 使能串口
     USART_Cmd(USART_TEST, ENABLE);
-}
-
-// 串口发送字符函数
-int SER_PutChar(int ch)
-{
-    // 等待发送寄存器为空，即等待上一次发送完成
-    while (!USART_GetFlagStatus(USART_TEST, USART_FLAG_TC))
-        ;
-    // 将字符发送到 USART
-    USART_SendData(USART_TEST, (uint8_t)ch);
-    // 返回发送的字符
-    return ch;
-}
-
-// 重定向标准输出函数
-int fputc(int c, FILE *f)
-{
-    if (c == '\n')
-    {
-        SER_PutChar('\r');
-    }
-    return (SER_PutChar(c));
 }
 
 // 串口接收中断处理函数
@@ -81,6 +59,7 @@ void USART1_IRQHandler(void)
     {
         // 从串口接收数据寄存器中读取数据
         char received_char = USART_ReceiveData(USART_TEST);
+
         // 处理接收到的数据
         rx_buffer[rx_buffer_index++] = received_char;
         // 如果缓冲区已满，则重置索引

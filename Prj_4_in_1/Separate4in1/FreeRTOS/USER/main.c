@@ -41,7 +41,7 @@ int main(void)
 	//   - NULL: 传递给任务函数的参数，这里没有传递任何参数
 	//   - TASK_PRORITY_LED: 任务的优先级，定义在代码中，用于控制任务的调度顺序
 	//   - NULL: 任务的句柄，用于后续对任务的操作，这里不需要返回任务句柄，因此为 NULL
-	xTaskCreate( task_led, "task_led", 128, NULL, TASK_PRORITY_LED, NULL );
+	xTaskCreate( task_led, "task_led", 64, NULL, TASK_PRORITY_LED, NULL );
 	xTaskCreate( ultrasound_task, "ultrasound_task", 128, NULL, 2, NULL );
 
 
