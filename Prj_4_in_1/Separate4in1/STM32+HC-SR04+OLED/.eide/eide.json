@@ -1,0 +1,255 @@
+{
+  "name": "project",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "Hardware",
+        "files": [
+          {
+            "path": "Hardware/FMQ.c"
+          },
+          {
+            "path": "Hardware/FMQ.h"
+          },
+          {
+            "path": "Hardware/HCSR04.c"
+          },
+          {
+            "path": "Hardware/HCSR04.h"
+          },
+          {
+            "path": "Hardware/OELD_Data.c"
+          },
+          {
+            "path": "Hardware/OELD_Data.h"
+          },
+          {
+            "path": "Hardware/OLED.c"
+          },
+          {
+            "path": "Hardware/OLED.h"
+          },
+          {
+            "path": "Hardware/Serial.c"
+          },
+          {
+            "path": "Hardware/Serial.h"
+          },
+          {
+            "path": "Hardware/Timer.c"
+          },
+          {
+            "path": "Hardware/Timer.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Library",
+        "files": [
+          {
+            "path": "library/misc.c"
+          },
+          {
+            "path": "library/stm32f10x_adc.c"
+          },
+          {
+            "path": "library/stm32f10x_bkp.c"
+          },
+          {
+            "path": "library/stm32f10x_can.c"
+          },
+          {
+            "path": "library/stm32f10x_cec.c"
+          },
+          {
+            "path": "library/stm32f10x_crc.c"
+          },
+          {
+            "path": "library/stm32f10x_dac.c"
+          },
+          {
+            "path": "library/stm32f10x_dbgmcu.c"
+          },
+          {
+            "path": "library/stm32f10x_dma.c"
+          },
+          {
+            "path": "library/stm32f10x_exti.c"
+          },
+          {
+            "path": "library/stm32f10x_flash.c"
+          },
+          {
+            "path": "library/stm32f10x_fsmc.c"
+          },
+          {
+            "path": "library/stm32f10x_gpio.c"
+          },
+          {
+            "path": "library/stm32f10x_i2c.c"
+          },
+          {
+            "path": "library/stm32f10x_iwdg.c"
+          },
+          {
+            "path": "library/stm32f10x_pwr.c"
+          },
+          {
+            "path": "library/stm32f10x_rcc.c"
+          },
+          {
+            "path": "library/stm32f10x_rtc.c"
+          },
+          {
+            "path": "library/stm32f10x_sdio.c"
+          },
+          {
+            "path": "library/stm32f10x_spi.c"
+          },
+          {
+            "path": "library/stm32f10x_tim.c"
+          },
+          {
+            "path": "library/stm32f10x_usart.c"
+          },
+          {
+            "path": "library/stm32f10x_wwdg.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Start",
+        "files": [
+          {
+            "path": "Start/core_cm3.c"
+          },
+          {
+            "path": "Start/core_cm3.h"
+          },
+          {
+            "path": "Start/startup_stm32f10x_md.s"
+          },
+          {
+            "path": "Start/stm32f10x.h"
+          },
+          {
+            "path": "Start/system_stm32f10x.c"
+          },
+          {
+            "path": "Start/system_stm32f10x.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "System",
+        "files": [
+          {
+            "path": "System/Delay.c"
+          },
+          {
+            "path": "System/Delay.h"
+          },
+          {
+            "path": "System/sys/sys.c"
+          },
+          {
+            "path": "System/sys/sys.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "User",
+        "files": [
+          {
+            "path": "user/main.c"
+          },
+          {
+            "path": "user/stm32f10x_conf.h"
+          },
+          {
+            "path": "user/stm32f10x_it.c"
+          },
+          {
+            "path": "user/stm32f10x_it.h"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "b6cf518d4e0af612d85dafb6bd992cc5"
+  },
+  "targets": {
+    "Target 1": {
+      "excludeList": [],
+      "toolchain": "GCC",
+      "compileConfig": {
+        "cpuType": "Cortex-M3",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "Listings\\stm32f1x_64KB_flash.ld",
+        "useCustomScatterFile": true,
+        "storageLayout": {
+          "RAM": [],
+          "ROM": []
+        },
+        "options": "null"
+      },
+      "uploader": "OpenOCD",
+      "uploadConfig": {
+        "bin": "",
+        "target": "stm32f1x",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "null",
+            "cpuName": "null"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "Start",
+          "library",
+          "user",
+          "System",
+          "Hardware",
+          "Hardware/HC-SR04",
+          "System/sys",
+          "Hardware/DHT11",
+          ".eide/deps"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "USE_STDPERIPH_DRIVER",
+          "STM32F10X_MD"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}
