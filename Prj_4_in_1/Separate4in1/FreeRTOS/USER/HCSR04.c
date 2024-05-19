@@ -35,12 +35,15 @@ void HCSR04_Start()
 	GPIO_ResetBits(Trig_Port, Trig_Pin);
 	// Timer_Init();
 }
-
+#define LED2_GPIO_PORT GPIOB
+#define LED2_GPIO GPIO_Pin_10
 uint16_t HCSR04_GetValue()
 {
 	HCSR04_Start();
 	// Delay_ms(100);
+	GPIO_SetBits(LED2_GPIO_PORT, LED2_GPIO);
 	vTaskDelay(pdMS_TO_TICKS(100));
+	GPIO_ResetBits(LED2_GPIO_PORT, LED2_GPIO);
 	return ((Time * 0.0001) * 34000) / 2;  // cm/s  [(0.00001s*340m/s)/2] * 100
 //	return Time;
 }

@@ -8,6 +8,7 @@
 
 #include "led.h"
 #include "ultrasound_tsk.h"
+// #include "adc.h"
 
 uint32_t SystemCoreClock = 256000000;
 
@@ -23,16 +24,23 @@ int main(void)
 	RCC_ClocksTypeDef clocks;
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 	RCC_GetClocksFreq(&clocks); //获取时钟频率
+	// UART_Configuration();
+	// ADC_Configuration();
 
-	// 超声检测初始化
-	ultrasound_init();
+	// // 超声检测初始化
+	// ultrasound_init();
 	//
 
 	
 	// printf("SYSCLK: %3.1fMhz, \nHCLK: %3.1fMhz, \nPCLK1: %3.1fMhz, \nPCLK2: %3.1fMhz, \nADCCLK: %3.1fMhz\n",
 	// 		   (float)clocks.SYSCLK_Frequency / 1000000, (float)clocks.HCLK_Frequency / 1000000,
 	// 		   (float)clocks.PCLK1_Frequency / 1000000, (float)clocks.PCLK2_Frequency / 1000000, (float)clocks.ADCCLK_Frequency / 1000000);
-    
+    // printf("\n");
+	// printf("SYSCLK: %3.1fMhz, HCLK: %3.1fMhz, PCLK1: %3.1fMhz, PCLK2: %3.1fMhz, ADCCLK: %3.1fMhz\n",
+	// 		   (float)clocks.SYSCLK_Frequency / 1000000, (float)clocks.HCLK_Frequency / 1000000,
+	// 		   (float)clocks.PCLK1_Frequency / 1000000, (float)clocks.PCLK2_Frequency / 1000000, (float)clocks.ADCCLK_Frequency / 1000000);
+
+	printf("ADC Single Test\n");
     // 创建一个 FreeRTOS 任务来运行 LED 控制任务
 	// 参数说明：
 	//   - task_led: 任务函数的指针，这里是指向任务 LED 控制函数的指针
@@ -43,6 +51,7 @@ int main(void)
 	//   - NULL: 任务的句柄，用于后续对任务的操作，这里不需要返回任务句柄，因此为 NULL
 	xTaskCreate( task_led, "task_led", 64, NULL, TASK_PRORITY_LED, NULL );
 	xTaskCreate( ultrasound_task, "ultrasound_task", 128, NULL, 2, NULL );
+	// xTaskCreate( task_adc, "task_adc", 128, NULL, 2, NULL );
 
 
 	

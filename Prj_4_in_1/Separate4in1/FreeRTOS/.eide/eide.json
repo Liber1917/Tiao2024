@@ -56,6 +56,9 @@
         "name": "FWLib",
         "files": [
           {
+            "path": "Libraries/AIR32F10xLib/src/air32f10x_adc.c"
+          },
+          {
             "path": "Libraries/AIR32F10xLib/src/air32f10x_dma.c"
           },
           {
@@ -91,7 +94,8 @@
     "freertos": {
       "excludeList": [
         "<virtual_root>/USER/main.c",
-        "<virtual_root>/USER"
+        "<virtual_root>/USER",
+        "USER/adc.c"
       ],
       "toolchain": "GCC",
       "compileConfig": {

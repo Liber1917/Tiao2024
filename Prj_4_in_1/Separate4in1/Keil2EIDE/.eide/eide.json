@@ -1,0 +1,141 @@
+{
+  "name": "LED_Control",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "CORE",
+        "files": [
+          {
+            "path": "Libraries/STARTUP/gcc/startup_air32f10x.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "FWLib",
+        "files": [
+          {
+            "path": "Libraries/AIR32F10xLib/src/air32f10x_gpio.c"
+          },
+          {
+            "path": "Libraries/AIR32F10xLib/src/air32f10x_rcc.c"
+          },
+          {
+            "path": "Libraries/AIR32F10xLib/src/air32f10x_tim.c"
+          },
+          {
+            "path": "Libraries/AIR32F10xLib/src/misc.c"
+          },
+          {
+            "path": "USER/HCSR04.c"
+          },
+          {
+            "path": "USER/Serial.c"
+          },
+          {
+            "path": "USER/Timer.c"
+          },
+          {
+            "path": "Libraries/AIR32F10xLib/src/air32f10x_usart.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "SYSTEM",
+        "files": [
+          {
+            "path": "SYSTEM/delay/delay.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "USER",
+        "files": [
+          {
+            "path": "Libraries/AIR32F10xLib/src/system_air32f10x.c"
+          },
+          {
+            "path": "USER/beeper.c"
+          },
+          {
+            "path": "USER/main.c"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": ".pack/Keil/AIR32F103_DFP.1.1.9",
+  "miscInfo": {
+    "uid": "fe3489439e51e90dd63cf8c0c85bf140"
+  },
+  "targets": {
+    "FirstLight_withoutRST": {
+      "excludeList": [
+        "<virtual_root>/USER/air32f10x_it.c"
+      ],
+      "toolchain": "GCC",
+      "compileConfig": {
+        "cpuType": "Cortex-M3",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "./Libraries/STARTUP/gcc/linker/AIR32F103XB_FLASH.ld",
+        "useCustomScatterFile": true,
+        "storageLayout": {
+          "RAM": [],
+          "ROM": []
+        },
+        "options": "null"
+      },
+      "uploader": "OpenOCD",
+      "uploadConfig": {
+        "bin": "",
+        "target": "stm32f1x",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "null",
+            "cpuName": "null"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "SYSTEM/delay",
+          "USER",
+          "Libraries/AIR32F10xLib/inc",
+          "Libraries/CMSIS/Include",
+          ".cmsis/include",
+          ".eide/deps"
+        ],
+        "libList": [
+          "Libraries/AIR32F10xLib/lib/cryptlib"
+        ],
+        "sourceDirList": [],
+        "defineList": [
+          "USE_STDPERIPH_DRIVER"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}

@@ -5,7 +5,7 @@
 #include "task.h"
 
 #include "usart.h"
-
+#include "HCSR04.h"
 #define LED2_GPIO_PORT GPIOB
 #define LED2_GPIO_PORT_RCC RCC_APB2Periph_GPIOB
 #define LED2_GPIO GPIO_Pin_10

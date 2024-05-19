@@ -1,5 +1,9 @@
 #include "usart.h"
 
+#ifndef SKIP_THIS_FILE
+// 这里放置需要编译的代码
+
+
 // 定义串口接收缓冲区大小
 #define RX_BUFFER_SIZE 128
 char rx_buffer[RX_BUFFER_SIZE];
@@ -79,18 +83,19 @@ void USART1_IRQHandler(void)
     // 检查是否是串口接收中断
     if (USART_GetITStatus(USART_TEST, USART_IT_RXNE) != RESET)
     {
-        // 从串口接收数据寄存器中读取数据
-        char received_char = USART_ReceiveData(USART_TEST);
-        // 处理接收到的数据
-        rx_buffer[rx_buffer_index++] = received_char;
-        // 如果缓冲区已满，则重置索引
-        if (rx_buffer_index >= RX_BUFFER_SIZE)
-        {
-            rx_buffer_index = 0;
-        }
+        // // 从串口接收数据寄存器中读取数据
+        // char received_char = USART_ReceiveData(USART_TEST);
+        // // 处理接收到的数据
+        // rx_buffer[rx_buffer_index++] = received_char;
+        // // 如果缓冲区已满，则重置索引
+        // if (rx_buffer_index >= RX_BUFFER_SIZE)
+        // {
+        //     rx_buffer_index = 0;
+        // }
 
         // 清除中断标志
         USART_ClearITPendingBit(USART_TEST, USART_IT_RXNE);
     }
 
 }
+#endif

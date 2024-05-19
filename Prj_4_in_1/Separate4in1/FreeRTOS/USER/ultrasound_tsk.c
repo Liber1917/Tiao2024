@@ -66,6 +66,7 @@ uint32_t receivedBytes;
 
 void ultrasound_task(void *pvParameters)
 {
+    ultrasound_init();
     while(1) {
         vTaskDelay(pdMS_TO_TICKS(1000));
         
@@ -75,7 +76,10 @@ void ultrasound_task(void *pvParameters)
             // "当前无发送且接收数据" 的状态
             SER_PutChar16(0xa0);
         }
-
+        else{
+            HCSR04_GetValue();
+        }
+        
 
         // // 检查是否接收到了数据
         // if (USART_GetFlagStatus(USART_TEST, USART_FLAG_RXNE))
