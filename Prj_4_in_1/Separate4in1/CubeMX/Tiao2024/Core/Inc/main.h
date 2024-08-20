@@ -59,7 +59,11 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 
 /* USER CODE BEGIN Private defines */
-
+extern uint16_t ADC1_Value_DMA[4];
+extern uint16_t TIM_Tick;
+extern uint8_t buffer[12];
+extern uint8_t USART_buff[10];
+extern uint16_t Time;//高电平时间
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

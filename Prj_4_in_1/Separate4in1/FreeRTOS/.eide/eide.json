@@ -3,7 +3,6 @@
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [
-    ".eide/deps",
     "USER"
   ],
   "virtualFolder": {
@@ -137,18 +136,16 @@
           "FreeRTOS-Kernel/portable/GCC/ARM_CM3",
           ".cmsis/include",
           "RTE/_freertos",
-          ".eide/deps",
           "Libraries/AIR32F10xLib/inc"
         ],
         "libList": [
           "."
         ],
-        "sourceDirList": [],
         "defineList": [
           "USE_STDPERIPH_DRIVER"
         ]
       }
     }
   },
-  "version": "3.3"
+  "version": "3.4"
 }

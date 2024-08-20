@@ -2,9 +2,7 @@
   "name": "LED_Control",
   "type": "ARM",
   "dependenceList": [],
-  "srcDirs": [
-    ".eide/deps"
-  ],
+  "srcDirs": [],
   "virtualFolder": {
     "name": "<virtual_root>",
     "files": [],
@@ -124,18 +122,16 @@
           "USER",
           "Libraries/AIR32F10xLib/inc",
           "Libraries/CMSIS/Include",
-          ".cmsis/include",
-          ".eide/deps"
+          ".cmsis/include"
         ],
         "libList": [
           "Libraries/AIR32F10xLib/lib/cryptlib"
         ],
-        "sourceDirList": [],
         "defineList": [
           "USE_STDPERIPH_DRIVER"
         ]
       }
     }
   },
-  "version": "3.3"
+  "version": "3.4"
 }

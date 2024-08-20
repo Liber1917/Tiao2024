@@ -18,6 +18,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -43,13 +46,17 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint16_t ADC1_Value_DMA[4]={0};
+uint16_t TIM_Tick = 0;
+uint8_t USART_buff[10];
+uint16_t DISTANCE;//距离
+uint16_t Time=0;//高电平时间
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+uint16_t HCSR04_GetValue();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -86,7 +93,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_ADC1_Init();
+  MX_TIM1_Init();
+  MX_USART1_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+	HAL_TIM_Base_Start_IT(&htim1);
+	HAL_TIM_Base_Start_IT(&htim2);
+	HAL_ADCEx_Calibration_Start(&hadc1);    
 
   /* USER CODE END 2 */
 
@@ -94,10 +108,31 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		if(TIM_Tick<=1000)
+		{
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);//HC-SR04 init
+			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
+			continue;
+		}
+		
+		for(int i=0;i<4;i++)
+		{
+		HAL_ADC_Start(&hadc1);
+		HAL_ADC_PollForConversion(&hadc1,0xffff);
+		ADC1_Value_DMA[i]=HAL_ADC_GetValue(&hadc1);
+		}
+		HAL_ADC_Stop(&hadc1);
+		
+		DISTANCE=HCSR04_GetValue();
+		
+
+	
 		HAL_Delay(300);
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
 		HAL_Delay(300);
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
+		
+		
 
     /* USER CODE END WHILE */
 
@@ -114,6 +149,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -143,10 +179,31 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /* USER CODE BEGIN 4 */
 
+void HCSR04_Start()
+{
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_SET);
+	HAL_Delay(45);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);
+	Time=0;
+}
+
+uint16_t HCSR04_GetValue()
+{
+	HCSR04_Start();
+	HAL_Delay(100);
+//	return ((Time * 0.0001) * 34000) / 2;  // cm/s  [(0.00001s*340m/s)/2] * 100
+	return Time;
+}
 /* USER CODE END 4 */
 
 /**

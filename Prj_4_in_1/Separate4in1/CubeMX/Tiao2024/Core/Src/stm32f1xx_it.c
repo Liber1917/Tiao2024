@@ -31,7 +31,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#include "usart.h"
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,7 +55,9 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern ADC_HandleTypeDef hadc1;
+extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim2;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -114,6 +116,7 @@ void MemManage_Handler(void)
 void BusFault_Handler(void)
 {
   /* USER CODE BEGIN BusFault_IRQn 0 */
+	
 
   /* USER CODE END BusFault_IRQn 0 */
   while (1)
@@ -197,6 +200,62 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f1xx.s).                    */
 /******************************************************************************/
+
+/**
+  * @brief This function handles ADC1 and ADC2 global interrupts.
+  */
+void ADC1_2_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC1_2_IRQn 0 */
+
+  /* USER CODE END ADC1_2_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc1);
+  /* USER CODE BEGIN ADC1_2_IRQn 1 */
+
+  /* USER CODE END ADC1_2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM1 update interrupt.
+  */
+void TIM1_UP_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM1_UP_IRQn 0 */
+	TIM_Tick = (TIM_Tick<2000)?(TIM_Tick+1):1001;
+  /* USER CODE END TIM1_UP_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim1);
+  /* USER CODE BEGIN TIM1_UP_IRQn 1 */
+		if(TIM_Tick%50==0)
+		{
+			for(int i=0;i<4;i++)
+			{
+				uint16_t value = ADC1_Value_DMA[i];
+				USART_buff[2*i]=(uint8_t)(value>>8 & 0xFF);
+				USART_buff[2*i+1]=(uint8_t)(value & 0xFF);
+			}
+			USART_buff[8]=(uint8_t)(Time>>8 & 0xFF);
+			USART_buff[9]=(uint8_t)(Time & 0xFF);
+			HAL_UART_Transmit(&huart1, (uint8_t *)USART_buff, 10, 0xffff);
+		}
+  /* USER CODE END TIM1_UP_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM2 global interrupt.
+  */
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+	if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1)==1)
+	{
+		Time ++;
+	}
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+
+  /* USER CODE END TIM2_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 
